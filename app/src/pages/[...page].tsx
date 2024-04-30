@@ -7,6 +7,7 @@ import { BuilderContent } from "@builder.io/sdk";
 import { GetStaticProps } from "next";
 import "../builder-registry";
 import '@builder.io/widgets';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
