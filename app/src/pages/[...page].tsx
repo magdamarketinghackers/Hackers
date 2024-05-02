@@ -7,7 +7,7 @@ import { BuilderContent } from "@builder.io/sdk";
 import { GetStaticProps } from "next";
 import "../builder-registry";
 import '@builder.io/widgets';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
