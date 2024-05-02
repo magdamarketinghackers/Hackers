@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/saltic",
-      "destination": "/"
+      "source": "/",
+      "destination": "/saltic"
     }
   ]
 }
