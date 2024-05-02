@@ -1,5 +1,8 @@
 {
-  "redirects": [
-    { "source": "/saltic", "destination": "/", "statusCode": 301 }
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/saltic"
+    }
   ]
 }
