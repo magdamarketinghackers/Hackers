@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/saltic",
+      "destination": "https://www.salticgrzybowo.pl",
+      "permanent": true,
+      "statusCode": 301
+    }
+  ]
+}
