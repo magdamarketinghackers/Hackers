@@ -5,10 +5,15 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/saltic'); // Przekierowanie na stronę /saltic
-  }, []); // Efekt wykona się tylko raz po pierwszym renderowaniu komponentu
+    // Sprawdzamy, czy użytkownik jest na stronie głównej
+    if (router.pathname === '/') {
+      // Jeśli tak, przekierowujemy go na /saltic
+      router.push('/saltic');
+    }
+  }, [router.pathname]); // Efekt zostanie wykonany za każdym razem, gdy zmieni się ścieżka URL
 
   return null; // Możesz zwrócić null lub inny komponent, strona będzie przekierowana zanim cokolwiek zostanie wyrenderowane
 };
 
 export default Home;
+W powyższym kodzie:
