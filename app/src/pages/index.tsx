@@ -1,29 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const Home = () => {
   const router = useRouter();
-  const [content, setContent] = useState('');
 
   useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        // Pobieramy zawartość tylko wtedy, gdy ścieżka URL jest równa '/'
-        if (router.pathname === '/') {
-          const response = await axios.get('/api/saltic');
-          setContent(response.data.content);
-        }
-      } catch (error) {
-        console.error('Error fetching content:', error);
-        // Obsługa błędu
-      }
-    };
+    // Sprawdzamy, czy użytkownik jest na stronie głównej
+    if (router.pathname === '/') {
+      // Jeśli tak, przekierowujemy go na /saltic
+      router.push('/saltic');
+    }
+  }, [router.pathname]); // Efekt zostanie wykonany za każdym razem, gdy zmieni się ścieżka URL
 
-    fetchContent();
-  }, [router.pathname]); // Wywołujemy fetchContent() tylko wtedy, gdy zmienia się ścieżka URL
-
-  return <div dangerouslySetInnerHTML={{ __html: content }} />;
+  return null; // Możesz zwrócić null lub inny komponent, strona będzie przekierowana zanim cokolwiek zostanie wyrenderowane
 };
 
 export default Home;
