@@ -1,35 +1,35 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-app-hackers/node_modules
-app-hackers/.pnp
+app/node_modules
+app/.pnp
 .pnp.js
 
 # testing
-app-hackers/coverage
+app/coverage
 
 # next.js
-app-hackers/.next/
-app-hackers/out/
+app/.next/
+app/out/
 
 # production
-app-hackers/build
+app/build
 
 # misc
 *.DS_Store
 *.pem
 
 # debug
-app-hackers/npm-debug.log*
-app-hackers/yarn-debug.log*
-app-hackers/yarn-error.log*
+app/npm-debug.log*
+app/yarn-debug.log*
+app/yarn-error.log*
 
 # local env files
-app-hackers/.env.local
-app-hackers/.env.development.local
-app-hackers/.env.test.local
-app-hackers/.env.production.local
+app/.env.local
+app/.env.development.local
+app/.env.test.local
+app/.env.production.local
 
 # vercel
-app-hackers/.vercel
+app/.vercel
 
