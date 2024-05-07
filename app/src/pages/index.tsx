@@ -1,30 +1,19 @@
-
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { useEffect, useState } from 'react';
-import { builder, BuilderComponent } from '@builder.io/react';
-
-// Konfiguruj klucz API Builder.io
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 const Home = () => {
-  const [content, setContent] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    // Pobierz zawartość dla '/saltic' z Builder.io
-    builder.get('page', { url: '/saltic' })
-      .promise()
-      .then((page) => {
-        setContent(page);
-      });
-  }, []);
+    // Sprawdzamy, czy użytkownik jest na stronie głównej
+    if (router.pathname === '/') {
+      // Jeśli tak, przekierowujemy go na /saltic
+      router.push('/saltic');
+    }
+  }, [router.pathname]); // Efekt zostanie wykonany za każdym razem, gdy zmieni się ścieżka URL
 
-  if (!content) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <BuilderComponent model="page" content={content} />
-  );
+  return null; // Możesz zwrócić null lub inny komponent, strona będzie przekierowana zanim cokolwiek zostanie wyrenderowane
 };
 
 export default Home;
