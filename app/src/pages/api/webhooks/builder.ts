@@ -26,7 +26,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
                 }
             );
 
-            // Push the changes to the newly created branch
+            // Push the changes to the newly created branchh
             await axios.put(`https://api.github.com/repos/magdamarketinghackers/Hackers/contents/path_to_your_file`, {
                 message: 'Update from Builder.io webhook',
                 content: Buffer.from(JSON.stringify(data)).toString('base64'),
