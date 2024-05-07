@@ -1,39 +1,30 @@
-import React from "react";
-import { BuilderComponent, builder } from "@builder.io/react";
-import DefaultErrorPage from "next/error";
-import Head from "next/head";
-import { GetStaticProps } from "next";
 
-// Initialize the Builder.io SDK
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { useEffect, useState } from 'react';
+import { builder, BuilderComponent } from '@builder.io/react';
+
+// Konfiguruj klucz API Builder.io
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-// Define the getStaticProps function to fetch content for the homepage
-export const getStaticProps: GetStaticProps = async () => {
-  const page = await builder.get("page", { url: '/saltic' }).promise();
+const Home = () => {
+  const [content, setContent] = useState(null);
 
-  return {
-    props: {
-      page: page || null,
-    },
-    // Revalidate the content every 10 seconds
-    revalidate: 10,
-  };
-};
+  useEffect(() => {
+    // Pobierz zawartość dla '/saltic' z Builder.io
+    builder.get('page', { url: '/saltic' })
+      .promise()
+      .then((page) => {
+        setContent(page);
+      });
+  }, []);
 
-// Define the Page component to render the homepage
-export default function Home({ page }) {
-  // If there is no page content, show a 404 error
-  if (!page) {
-    return <DefaultErrorPage statusCode={404} />;
+  if (!content) {
+    return <div>Loading...</div>;
   }
 
   return (
-    <>
-      <Head>
-        <title>{page?.data?.title || 'Home'}</title>
-      </Head>
-      {/* Render the Builder page content */}
-      <BuilderComponent model="page" content={page} />
-    </>
+    <BuilderComponent model="page" content={content} />
   );
-}
+};
+
+export default Home;
