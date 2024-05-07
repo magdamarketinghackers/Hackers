@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     // Sprawdzamy, czy użytkownik jest na stronie głównej
     if (router.pathname === '/') {
-      // Jeśli tak, przekierowujemy go na /saltic
+      // Jeśli tak, przekierowujemy go na /salticc
       router.push('/saltic');
     }
   }, [router.pathname]); // Efekt zostanie wykonany za każdym razem, gdy zmieni się ścieżka URL
