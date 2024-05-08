@@ -1,18 +1,19 @@
-import { BuilderComponent, builder } from '@builder.io/react';
+import React from "react";
+import { BuilderComponent, BuilderContent } from "@builder.io/react";
 
-require('dotenv').config();
-
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-
-function Home({ page }) {
+// Define the Home component with proper TypeScript typing
+function Home({ page }: { page: BuilderContent | null }) {
   return (
     <>
       {page ? (
         <BuilderComponent model="page" content={page} />
-      ) : null}
+      ) : (
+        <div>Page is loading or does not exist...</div>
+      )}
     </>
   );
 }
+
 
 export async function getStaticProps() {
   const page = await builder.get('page', { url: '/' }).promise();
