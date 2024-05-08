@@ -15,7 +15,7 @@ builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Fetch the builder content for the given page
   const page = await builder
-    .get("homepage", {
+    .get("page", {
       userAttributes: {
         urlPath: "/" + ((params?.page as string[])?.join("/") || ""),
       },
@@ -68,7 +68,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         <title>{page?.data?.title}</title>
       </Head>
       {/* Render the Builder page */}
-      <BuilderComponent model="homepage" content={page || undefined} />
+      <BuilderComponent model="page" content={page || undefined} />
     </>
   );
 }

@@ -1,11 +1,30 @@
-import React from "react";
+import { builder, BuilderComponent } from '@builder.io/react';
+import { GetStaticProps } from 'next';
 
-export default function HomePage() {
-  return (
-    <div style={{ textAlign: "center", margin: "20px" }}>
-      <img src="/logo.png" alt="Logo Agencji Marketingowej" style={{ width: "150px", marginBottom: "20px" }} />
-      <h1>Agencja Marketingowa Marketing Hackers</h1>
-    </div>
-  );
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+
+export const getStaticProps: GetStaticProps = async () => {
+  // Pobierz treść strony głównej z Builder.io
+  const content = await builder.get('homepage').toPromise();
+
+  return {
+    props: {
+      content: content || null,
+    },
+  };
+};
+
+interface HomePageProps {
+  content: any; // Możesz zdefiniować typ tutaj, jeśli znasz strukturę danych z Builder.io
 }
 
+const HomePage: React.FC<HomePageProps> = ({ content }) => {
+  return (
+    <div>
+      {/* Renderuj BuilderComponent z treścią strony głównej */}
+      <BuilderComponent content={content} model="homepage" />
+    </div>
+  );
+};
+
+export default HomePage;
