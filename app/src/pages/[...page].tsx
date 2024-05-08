@@ -1,13 +1,14 @@
-// pages/[...page].tsx
 import React from "react";
 import { useRouter } from "next/router";
 import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
-import { BuilderContent } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
 import Head from "next/head";
+import { BuilderContent } from "@builder.io/sdk";
 import { GetStaticProps } from "next";
+import "../builder-registry";
+import '@builder.io/widgets';
 
-// Replace with your Public API Key
+
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 // Define a function that fetches the Builder
@@ -44,8 +45,10 @@ export async function getStaticPaths() {
 
   // Generate the static paths for all pages in Builder
   return {
-    paths: pages.map((page) => `${page.data?.url}`).filter(url => url !== '/'),
-    fallback: 'blocking',
+    paths: pages
+      .map((page) => String(page.data?.url))
+      .filter((url) => url !== "/"),
+    fallback: "blocking",
   };
 }
 
