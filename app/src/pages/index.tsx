@@ -1,6 +1,6 @@
 import React from "react";
-import { BuilderComponent, BuilderContent } from "@builder.io/react";
-
+import { BuilderComponent, builder } from "@builder.io/react";
+import { BuilderContent } from "@builder.io/sdk";
 // Define the Home component with proper TypeScript typing
 function Home({ page }: { page: BuilderContent | null }) {
   return (
