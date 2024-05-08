@@ -28,7 +28,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ page }) => {
-  // Display a 404 page if no homepage content is available
+  // Display a 404 page if no homepage content is availablee
   if (!page) {
     return <DefaultErrorPage statusCode={404} />;
   }
