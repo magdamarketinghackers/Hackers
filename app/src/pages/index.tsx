@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import DefaultErrorPage from 'next/error';
 import '@builder.io/widgets';
+import { Montserrat } from "next/font/google";
 
 // Initialize Builder.io with your public API key
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
