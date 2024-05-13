@@ -6,8 +6,7 @@ import Head from "next/head";
 import { BuilderContent } from "@builder.io/sdk";
 import { GetStaticProps } from "next";
 import "../builder-registry";
-import '@builder.io/widgets/dist/lib/builder-widgets-async';
-import CustomScriptLoader from '../components/HeaderScriptLoader';
+import '@builder.io/widgets';
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -73,7 +72,6 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
       <BuilderComponent model="page" content={page || undefined} />
-      <CustomScriptLoader scripts={page?.data?.headerScripts || []} />
     </>
   );
 }

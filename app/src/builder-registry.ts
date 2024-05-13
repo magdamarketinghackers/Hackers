@@ -16,23 +16,6 @@ Builder.registerComponent(
   }
 );
 
-Builder.registerComponent(
-  dynamic(() => import("./components/HeaderScriptLoader")),
-  {
-    name: "CustomScriptLoader",
-    inputs: [
-      {
-        name: "scripts",
-        type: "object",
-        hideFromUI: true,
-        meta: {
-          ts: "ScriptType[]",
-        },
-        required: true,
-      },
-    ],
-  }
-);
 
 Builder.registerComponent(
   dynamic(() => import("./pages/_app")),
