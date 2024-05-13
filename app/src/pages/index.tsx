@@ -3,6 +3,7 @@ import { BuilderComponent, builder } from '@builder.io/react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import DefaultErrorPage from 'next/error';
+import CustomScriptLoader from '../components/HeaderScriptLoader';
 
 // Initialize Builder.io with your public API key
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -36,9 +37,12 @@ const HomePage: React.FC<HomePageProps> = ({ page }) => {
   return (
     <>
       <Head>
-        <title>{page?.data?.title || 'Home'}</title>
+        <title>{page?.data?.title || 'Dynamiczna Strona'}</title>
+        {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
+        <link rel="icon" href={page?.data?.favicon } type="image/x-icon" />
       </Head>
-      <BuilderComponent model="page" content={page} />
+      <BuilderComponent model="page" content={page || undefined} />
+      <CustomScriptLoader scripts={page?.data?.headerScripts || []} />
     </>
   );
 };

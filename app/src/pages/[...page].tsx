@@ -7,7 +7,7 @@ import { BuilderContent } from "@builder.io/sdk";
 import { GetStaticProps } from "next";
 import "../builder-registry";
 import '@builder.io/widgets/dist/lib/builder-widgets-async';
-
+import CustomScriptLoader from '../components/HeaderScriptLoader';
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -69,9 +69,11 @@ export default function Page({ page }: { page: BuilderContent | null }) {
     <>
       <Head>
         <title>{page?.data?.title}</title>
+        {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
+        <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      {/* Render the Builder page */}
       <BuilderComponent model="page" content={page || undefined} />
+      <CustomScriptLoader scripts={page?.data?.headerScripts || []} />
     </>
   );
 }
