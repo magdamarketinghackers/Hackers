@@ -85,7 +85,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      <BuilderComponent model="nutta" content={page || undefined} />
+      <BuilderComponent model="page" content={page || undefined} />
     </>
   );
 }
