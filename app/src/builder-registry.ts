@@ -65,37 +65,4 @@ Builder.registerComponent(
   }
 );
 
-Builder.registerComponent(
-  dynamic(() => import("./pages")),
-  {
-    name: "HomePage",
-    inputs: [
-      {
-        name: "page",
-        type: "string",
-        meta: {
-          ts: "any",
-        },
-        required: true,
-      },
-    ],
-  }
-);
 
-Builder.registerComponent(
-  dynamic(() => import("./pages/[...page]")),
-  {
-    name: "Page",
-    inputs: [
-      {
-        name: "page",
-        type: "object",
-        hideFromUI: true,
-        meta: {
-          ts: "BuilderContent",
-        },
-        required: true,
-      },
-    ],
-  }
-);
