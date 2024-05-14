@@ -7,8 +7,6 @@ import { BuilderContent } from "@builder.io/sdk";
 import { GetStaticProps } from "next";
 import "../builder-registry";
 import '@builder.io/widgets';
-import { SpeedInsights } from "@vercel/speed-insights/next";
-
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -53,10 +51,17 @@ export async function getStaticPaths() {
   };
 }
 
+
+
 // Define the Page component
 export default function Page({ page }: { page: BuilderContent | null }) {
   const router = useRouter();
   const isPreviewing = useIsPreviewing();
+  const title = page?.data?.title || "Default Meta Title";
+  const description = page?.data?.description || "Default Meta Description";
+  const keywords = page?.data?.keywords || "Default Meta Keywords";
+  const image = page?.data?.image;
+
 
   // If the page content is not available
   // and not in preview mode, show a 404 error page
@@ -69,9 +74,17 @@ export default function Page({ page }: { page: BuilderContent | null }) {
   return (
     <>
       <Head>
-        <title>{page?.data?.title}</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+
+        {/* Social Sharing Tags */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+        {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
+        <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      {/* Render the Builder page */}
       <BuilderComponent model="page" content={page || undefined} />
     </>
   );
