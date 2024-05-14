@@ -1,65 +1,19 @@
-import React from 'react';
-import { BuilderComponent, builder, useIsPreviewing } from '@builder.io/react';
-import { useRouter } from "next/router";
-import { BuilderContent } from "@builder.io/sdk";
-import { GetStaticProps } from 'next';
-import Head from 'next/head';
-import DefaultErrorPage from 'next/error';
-import '@builder.io/widgets';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
-// Initialize Builder.io with your public API key
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+const Home = () => {
+  const router = useRouter();
 
-export const getStaticProps: GetStaticProps = async () => {
-  // Fetch the homepage content from Builder.io
-  const page = await builder.get('page', {
-    userAttributes: { urlPath: '/' },
-  }).toPromise();
+  useEffect(() => {
+    // Sprawdzamy, czy użytkownik jest na stronie głównej
+    if (router.pathname === '/') {
+      // Jeśli tak, przekierowujemy go na /salticc
+      router.push('/saltic');
+    }
+  }, [router.pathname]); // Efekt zostanie wykonany za każdym razem, gdy zmieni się ścieżka URL
 
-  return {
-    props: {
-      page: page || null,
-    },
-    // Revalidate the homepage content every 5 seconds
-    revalidate: 5,
-  };
+  return null; // Możesz zwrócić null lub inny komponent, strona będzie przekierowana zanim cokolwiek zostanie wyrenderowane
 };
 
-
-  
-
-// Define the Page component
-export default function Home({ page }: { page: BuilderContent | null }) {
-  const router = useRouter();
-  const isPreviewing = useIsPreviewing();
-  const title = page?.data?.title || "Default Meta Title";
-  const description = page?.data?.description || "Default Meta Description";
-  const keywords = page?.data?.keywords || "Default Meta Keywords";
-  const image = page?.data?.image;
-  // If the page content is not available
-  // and not in preview mode, show a 404 error page
-  if (!page && !isPreviewing) {
-    return <DefaultErrorPage statusCode={404} />;
-  }
-
-  // If the page content is available, render
-  // the BuilderComponent with the page content
-  return (
-    <>
-      <Head>
-        <title>{title}</title>
-        {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
-        <meta name="description" content={description} />
-        <meta name="keywords" content={keywords} />
-
-        {/* Social Sharing Tags */}
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={image} />
-        {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
-        <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
-      </Head>
-      <BuilderComponent model="page" content={page || undefined} />
-    </>
-  );
-}
+export default Home;
