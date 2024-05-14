@@ -11,7 +11,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       content: content || null,
     },
-    revalidate: 5,
   };
 };
 
@@ -20,12 +19,11 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ content }) => {
- 
   return (
     <div>
-      <BuilderComponent model="page" content={content} />
-    <div/>
-   
+      {/* Renderuj BuilderComponent z treścią strony głównej */}
+      <BuilderComponent content={content} model="page" />
+    </div>
   );
 };
 
