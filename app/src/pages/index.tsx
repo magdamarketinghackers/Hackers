@@ -1,5 +1,6 @@
 import { builder, BuilderComponent } from '@builder.io/react';
 import { GetStaticProps } from 'next';
+import Head from "next/head";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
