@@ -29,6 +29,14 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+  const title = page?.data?.title || "Default Meta Title";
+  const description = page?.data?.description || "Default Meta Description";
+  const keywords = page?.data?.keywords || "Default Meta Keywords";
+
+  // Extracting Social Sharing fields from page content
+  const image = page?.data?.image;
+
+
 
 // Define the Page component
 export default function Home({ page }: { page: BuilderContent | null }) {
@@ -46,7 +54,14 @@ export default function Home({ page }: { page: BuilderContent | null }) {
   return (
     <>
       <Head>
-        <title>{page?.data?.title}</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+
+        {/* Social Sharing Tags */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
         <style jsx global>{`
