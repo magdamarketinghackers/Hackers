@@ -30,18 +30,16 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-  const title = page?.data?.title || "Default Meta Title";
-  const description = page?.data?.description || "Default Meta Description";
-  const keywords = page?.data?.keywords || "Default Meta Keywords";
-
-  // Extracting Social Sharing fields from page content
-  const image = page?.data?.image;
+  
 
 // Define the Page component
 export default function Home({ page }: { page: BuilderContent | null }) {
   const router = useRouter();
   const isPreviewing = useIsPreviewing();
-
+  const title = page?.data?.title || "Default Meta Title";
+  const description = page?.data?.description || "Default Meta Description";
+  const keywords = page?.data?.keywords || "Default Meta Keywords";
+  const image = page?.data?.image;
   // If the page content is not available
   // and not in preview mode, show a 404 error page
   if (!page && !isPreviewing) {
