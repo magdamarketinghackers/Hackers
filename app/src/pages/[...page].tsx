@@ -4,20 +4,20 @@ import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
 import DefaultErrorPage from "next/error";
 import Head from "next/head";
 import { BuilderContent } from "@builder.io/sdk";
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 import "../builder-registry";
 import '@builder.io/widgets';
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-// Define a function that fetches the Builder
-// content for a given page
+// Define a function that fetches the Builder content for a given page
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Fetch the builder content for the given page
+  const pagePath = "/" + ((params?.page as string[])?.join("/") || "");
   const page = await builder
-    .get("page", {
+    .get("nutta", {
       userAttributes: {
-        urlPath: "/" + ((params?.page as string[])?.join("/") || ""),
+        urlPath: pagePath,
       },
     })
     .toPromise();
@@ -32,11 +32,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-// Define a function that generates the
-// static paths for all pages in Builder
-export async function getStaticPaths() {
+// Define a function that generates the static paths for all pages in Builder
+export const getStaticPaths: GetStaticPaths = async () => {
   // Get a list of all pages in Builder
-  const pages = await builder.getAll("page", {
+  const pages = await builder.getAll("nutta", {
     // We only need the URL field
     fields: "data.url",
     options: { noTargeting: true },
@@ -49,9 +48,7 @@ export async function getStaticPaths() {
       .filter((url) => url !== "/"),
     fallback: "blocking",
   };
-}
-
-
+};
 
 // Define the Page component
 export default function Page({ page }: { page: BuilderContent | null }) {
@@ -62,15 +59,12 @@ export default function Page({ page }: { page: BuilderContent | null }) {
   const keywords = page?.data?.keywords || "Default Meta Keywords";
   const image = page?.data?.image;
 
-
-  // If the page content is not available
-  // and not in preview mode, show a 404 error page
+  // If the page content is not available and not in preview mode, show a 404 error page
   if (!page && !isPreviewing) {
     return <DefaultErrorPage statusCode={404} />;
   }
 
-  // If the page content is available, render
-  // the BuilderComponent with the page content
+  // If the page content is available, render the BuilderComponent with the page content
   return (
     <>
       <Head>
@@ -85,7 +79,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      <BuilderComponent model="page" content={page || undefined} />
+      <BuilderComponent model="nutta" content={page || undefined} />
     </>
   );
 }
