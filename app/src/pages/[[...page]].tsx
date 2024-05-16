@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
 import DefaultErrorPage from "next/error";
 import Head from "next/head";
-import { BuilderContent, builder } from "@builder.io/sdk";
+import { BuilderContent } from "@builder.io/sdk";
 import { GetStaticProps, GetStaticPaths } from "next";
 import "../builder-registry";
 import '@builder.io/widgets';
@@ -58,39 +58,6 @@ export default function Page({ page }: { page: BuilderContent | null }) {
   const description = page?.data?.description || "Default Meta Description";
   const keywords = page?.data?.keywords || "Default Meta Keywords";
   const image = page?.data?.image;
-
-  useEffect(() => {
-
-    // Funkcja śledzenia kliknięcia w link
-    function trackLinkClick(event: Event) {
-      const pageUrl = window.location.pathname;
-      const target = event.target as HTMLElement;
-      if (target.tagName === 'A' && target.classList.contains('track-click')) {
-        builder.track('Link Click', { urlPath: pageUrl });
-        builder.trackConversion({ urlPath:  pageUrl  });
-      }
-    }
-
-    // Funkcja śledzenia przesyłania formularza
-    function trackFormSubmit(event: Event) {
-      const pageUrl = window.location.pathname;
-      const target = event.target as HTMLElement;
-      if (target.tagName === 'FORM' && target.classList.contains('track-submit')) {
-        builder.track('Form Submission', { urlPath:  pageUrl  });
-        builder.trackConversion({ urlPath:  pageUrl  });
-      }
-    }
-
-    // Dodaj słuchaczy zdarzeń do całego dokumentu
-    document.addEventListener('click', trackLinkClick);
-    document.addEventListener('submit', trackFormSubmit);
-
-    // Usuń słuchaczy zdarzeń przy odmontowaniu komponentu
-    return () => {
-      document.removeEventListener('click', trackLinkClick);
-      document.removeEventListener('submit', trackFormSubmit);
-    };
-  }, []);
 
   // If the page content is not available and not in preview mode, show a 404 error page
   if (!page && !isPreviewing) {
