@@ -60,10 +60,10 @@ export default function Page({ page }: { page: BuilderContent | null }) {
   const image = page?.data?.image;
 
   useEffect(() => {
-        const pageUrl = window.location.pathname;
 
     // Funkcja śledzenia kliknięcia w link
     function trackLinkClick(event: Event) {
+      const pageUrl = window.location.pathname;
       const target = event.target as HTMLElement;
       if (target.tagName === 'A' && target.classList.contains('track-click')) {
         builder.track('Link Click', { pageUrl });
@@ -73,6 +73,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
 
     // Funkcja śledzenia przesyłania formularza
     function trackFormSubmit(event: Event) {
+      const pageUrl = window.location.pathname;
       const target = event.target as HTMLElement;
       if (target.tagName === 'FORM' && target.classList.contains('track-submit')) {
         builder.track('Form Submission', { pageUrl });
