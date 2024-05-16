@@ -66,7 +66,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
       const pageUrl = window.location.pathname;
       const target = event.target as HTMLElement;
       if (target.tagName === 'A' && target.classList.contains('track-click')) {
-        builder.track('Link Click', { pageUrl });
+        builder.track('Link Click', { metadata: { pageUrl } });
         builder.trackConversion({ metadata: { pageUrl } });
       }
     }
@@ -76,7 +76,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
       const pageUrl = window.location.pathname;
       const target = event.target as HTMLElement;
       if (target.tagName === 'FORM' && target.classList.contains('track-submit')) {
-        builder.track('Form Submission', { pageUrl });
+        builder.track('Form Submission', { metadata: { pageUrl } });
         builder.trackConversion({ metadata: { pageUrl } });
       }
     }
