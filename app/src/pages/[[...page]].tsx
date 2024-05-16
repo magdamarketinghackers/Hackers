@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
 import DefaultErrorPage from "next/error";
 import Head from "next/head";
-import { BuilderContent } from "@builder.io/sdk";
+import { BuilderContent, builder } from "@builder.io/sdk";
 import { GetStaticProps, GetStaticPaths } from "next";
 import "../builder-registry";
 import '@builder.io/widgets';
