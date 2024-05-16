@@ -60,11 +60,14 @@ export default function Page({ page }: { page: BuilderContent | null }) {
   const image = page?.data?.image;
 
   useEffect(() => {
+        const pageUrl = window.location.pathname;
+
     // Funkcja śledzenia kliknięcia w link
     function trackLinkClick(event: Event) {
       const target = event.target as HTMLElement;
       if (target.tagName === 'A' && target.classList.contains('track-click')) {
-        builder.track('Link Click');
+        builder.track('Link Click', { pageUrl });
+        builder.trackConversion({ metadata: { pageUrl } });
       }
     }
 
@@ -72,7 +75,8 @@ export default function Page({ page }: { page: BuilderContent | null }) {
     function trackFormSubmit(event: Event) {
       const target = event.target as HTMLElement;
       if (target.tagName === 'FORM' && target.classList.contains('track-submit')) {
-        builder.track('Form Submission');
+        builder.track('Form Submission', { pageUrl });
+        builder.trackConversion({ metadata: { pageUrl } });
       }
     }
 
