@@ -84,6 +84,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         <meta property="og:image" content={image} />
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
+        <meta name="google-site-verification" content="BYhQB_f18cl-m9mqzdIUQzlwSg5-ERsACumke-kYyhE" />
       </Head>
       <BuilderComponent model="page" content={page || undefined} />
     </>
