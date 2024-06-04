@@ -15,7 +15,7 @@ builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Fetch the builder content for the given page
   const page = await builder
-    .get("page", {
+    .get("braas", {
       userAttributes: {
         urlPath: "/" + ((params?.page as string[])?.join("/") || ""),
       },
@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 // static paths for all pages in Builder
 export async function getStaticPaths() {
   // Get a list of all pages in Builder
-  const pages = await builder.getAll("page", {
+  const pages = await builder.getAll("braas", {
     // We only need the URL field
     fields: "data.url",
     options: { noTargeting: true },
@@ -80,7 +80,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
-
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Social Sharing Tags */}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -88,7 +88,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      <BuilderComponent model="page" content={page || undefined} />
+      <BuilderComponent model="braas" content={page || undefined} />
     </>
   );
 }
