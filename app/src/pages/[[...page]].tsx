@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Fetch the builder content for the given page
   const pagePath = "/" + ((params?.page as string[])?.join("/") || "");
   const page = await builder
-    .get("nutta", {
+    .get("macerat", {
       userAttributes: {
         urlPath: pagePath,
       },
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 // Define a function that generates the static paths for all pages in Builder
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get a list of all pages in Builder
-  const pages = await builder.getAll("nutta", {
+  const pages = await builder.getAll("macerat", {
     // We only need the URL field
     fields: "data.url",
     options: { noTargeting: true },
@@ -79,7 +79,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      <BuilderComponent model="nutta" content={page || undefined} />
+      <BuilderComponent model="macerat" content={page || undefined} />
     </>
   );
 }
