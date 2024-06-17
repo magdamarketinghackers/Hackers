@@ -79,7 +79,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      <BuilderComponent model="macerat" content={page || undefined} />
+      <BuilderComponent model="macerat" content={page || undefined} /> 
     </>
   );
 }
