@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { Playfair_Display } from '@next/font/google';
+import { Playfair_Display } from 'next/font/google';
 import type { AppProps } from "next/app";
 
 const playfairDisplay = Playfair_Display({
