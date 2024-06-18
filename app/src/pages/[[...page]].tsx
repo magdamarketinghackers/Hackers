@@ -78,6 +78,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         <meta property="og:image" content={image} />
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" />
       </Head>
       <BuilderComponent model="macerat" content={page || undefined} /> 
     </>
