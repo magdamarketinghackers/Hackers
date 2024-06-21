@@ -54,11 +54,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export default function Page({ page }: { page: BuilderContent | null }) {
   const router = useRouter();
   const isPreviewing = useIsPreviewing();
-  const title = page?.data?.title;
-  const description = page?.data?.description;
-  const keywords = page?.data?.keywords;
+  const title = page?.data?.title || " ";
+  const description = page?.data?.description || " ";
   const image = page?.data?.image;
-  
+
   // If the page content is not available and not in preview mode, show a 404 error page
   if (!page && !isPreviewing) {
     return <DefaultErrorPage statusCode={404} />;
@@ -70,7 +69,6 @@ export default function Page({ page }: { page: BuilderContent | null }) {
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content={keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Social Sharing Tags */}
         <meta property="og:title" content={title} />
@@ -78,11 +76,8 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         <meta property="og:image" content={image} />
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
       </Head>
-      <BuilderComponent model="macerat" content={page || undefined} /> 
+      <BuilderComponent model="macerat" content={page || undefined} />
     </>
   );
 }
