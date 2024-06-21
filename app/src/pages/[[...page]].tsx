@@ -57,7 +57,8 @@ export default function Page({ page }: { page: BuilderContent | null }) {
   const title = page?.data?.title;
   const description = page?.data?.description;
   const keywords = page?.data?.keywords;
-
+  const image = page?.data?.image;
+  
   // If the page content is not available and not in preview mode, show a 404 error page
   if (!page && !isPreviewing) {
     return <DefaultErrorPage statusCode={404} />;
