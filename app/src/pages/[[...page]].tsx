@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Fetch the builder content for the given page
   const pagePath = "/" + ((params?.page as string[])?.join("/") || "");
   const page = await builder
-    .get("nutta", {
+    .get("emocje", {
       userAttributes: {
         urlPath: pagePath,
       },
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 // Define a function that generates the static paths for all pages in Builder
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get a list of all pages in Builder
-  const pages = await builder.getAll("nutta", {
+  const pages = await builder.getAll("emocje", {
     // We only need the URL field
     fields: "data.url",
     options: { noTargeting: true },
@@ -54,9 +54,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export default function Page({ page }: { page: BuilderContent | null }) {
   const router = useRouter();
   const isPreviewing = useIsPreviewing();
-  const title = page?.data?.title || "Default Meta Title";
-  const description = page?.data?.description || "Default Meta Description";
-  const keywords = page?.data?.keywords || "Default Meta Keywords";
+  const title = page?.data?.title || "Meta Title";
+  const description = page?.data?.description || "Meta Description";
   const image = page?.data?.image;
 
   // If the page content is not available and not in preview mode, show a 404 error page
@@ -70,7 +69,6 @@ export default function Page({ page }: { page: BuilderContent | null }) {
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content={keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Social Sharing Tags */}
         <meta property="og:title" content={title} />
@@ -79,7 +77,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
         {/* Ładowanie favicony z CMS jeśli dostępna, inaczej domyślna */}
         <link rel="icon" href={page?.data?.favicon} type="image/x-icon" />
       </Head>
-      <BuilderComponent model="nutta" content={page || undefined} />
+      <BuilderComponent model="emocje" content={page || undefined} />
     </>
   );
 }
