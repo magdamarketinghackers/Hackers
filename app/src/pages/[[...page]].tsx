@@ -41,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     options: { noTargeting: true },
   });
 
-  // Generate the static paths for all pages in Builder
+
   return {
     paths: pages
       .map((page) => String(page.data?.url))
